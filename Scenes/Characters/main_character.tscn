@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://1wonofaummhj"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/main_character.gd" id="1_oi4h5"]
+[ext_resource type="Texture2D" uid="uid://c6gowvf1ybfd8" path="res://ART/CHARACTERS/MainCharacter2.png" id="2_sx2th"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4r4pr"]
+size = Vector2(14, 26)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abou3"]
+radius = 5.0
+height = 26.0
+
+[sub_resource type="Animation" id="Animation_t7ovf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7ksgl"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_u8w6g"]
+resource_name = "walk"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jg2nk"]
+_data = {
+"RESET": SubResource("Animation_t7ovf"),
+"idle": SubResource("Animation_7ksgl"),
+"walk": SubResource("Animation_u8w6g")
+}
+
+[node name="MainCharacter" type="CharacterBody2D"]
+collision_mask = 94
+script = ExtResource("1_oi4h5")
+
+[node name="DoorDetector" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorDetector"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_4r4pr")
+debug_color = Color(0.929412, 0.145098, 0.556863, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_abou3")
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -2)
+texture = ExtResource("2_sx2th")
+hframes = 3
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DoorTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "walk"
+libraries = {
+"": SubResource("AnimationLibrary_jg2nk")
+}
+
+[node name="WeaponSpawn" type="Marker2D" parent="."]
+position = Vector2(6, -1)
+
+[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
+[connection signal="timeout" from="DoorTimer" to="." method="_on_door_timer_timeout"]

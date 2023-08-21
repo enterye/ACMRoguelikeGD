@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcn6dwct8ibcu"]
+
+[ext_resource type="Texture2D" uid="uid://c47rma501kgv1" path="res://ART/OBJECTS/chest.png" id="1_c5lci"]
+[ext_resource type="Script" path="res://Scenes/Objects/chest.gd" id="1_pkmy2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhf6i"]
+radius = 18.0278
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5j3t"]
+size = Vector2(30, 8)
+
+[node name="Chest" type="StaticBody2D"]
+collision_layer = 64
+collision_mask = 7
+script = ExtResource("1_pkmy2")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_qhf6i")
+debug_color = Color(0.909804, 0.207843, 0.545098, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_t5j3t")
+
+[node name="ChestSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_c5lci")
+hframes = 2
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

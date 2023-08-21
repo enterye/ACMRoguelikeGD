@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/DefaultProjectile.gd" id="1_pm8my"]
+[ext_resource type="Texture2D" uid="uid://dlm1b0rwyrbs7" path="res://ART/PROJECTILES/NormalProjectile.png" id="2_ifbcf"]
+[ext_resource type="Texture2D" uid="uid://bxrspmk1vrw6q" path="res://ART/PARTICLES/sparks.png" id="3_4h1vx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4rvx"]
+size = Vector2(16, 7)
+
+[sub_resource type="Gradient" id="Gradient_etor1"]
+offsets = PackedFloat32Array(0, 0.696296)
+colors = PackedColorArray(0.901961, 0.945098, 0, 1, 0.901961, 0.945098, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jxh3o"]
+gradient = SubResource("Gradient_etor1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hx67e"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 73.68
+initial_velocity_max = 178.92
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -15.0
+angle_max = 15.0
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_jxh3o")
+
+[node name="DefaultProjectile" type="Area2D"]
+collision_layer = 4
+collision_mask = 74
+script = ExtResource("1_pm8my")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_j4rvx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ifbcf")
+
+[node name="Sparks" type="GPUParticles2D" parent="."]
+scale = Vector2(0.5, 0.5)
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_hx67e")
+texture = ExtResource("3_4h1vx")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.85
+randomness = 0.16
+
+[node name="SparkTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="SparkTimer" to="." method="_on_spark_timer_timeout"]
