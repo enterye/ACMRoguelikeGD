@@ -1,6 +1,6 @@
 extends "res://Scenes/Rooms/default_room.gd"
 
-func ready():
+func _ready():
 	up_socket = CLOSED
 	down_socket = OPEN
 	right_socket = CLOSED

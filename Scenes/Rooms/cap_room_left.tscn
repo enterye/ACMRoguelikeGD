@@ -11,5 +11,3 @@ layer_0/tile_data = PackedInt32Array(0, 0, 2, 65536, 0, 3, 131072, 0, 3, 196608,
 
 [node name="CollisionShape2D" parent="Doors/RightDoor" index="0"]
 disabled = false
-
-[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

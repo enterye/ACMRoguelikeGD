@@ -12,6 +12,12 @@ var contains_player: bool
 #this is so we don't spawn things more than once
 var player_visited: bool = false
 
+#this is for the wave function collapse
+var right_neighbor_valid: Array
+var down_neighbor_valid: Array
+var left_neighbor_valid: Array
+var up_neighbor_valid: Array
+
 #this is so the dungeon controller knows which direction a room can be generated in
 var right_socket
 var left_socket
@@ -49,6 +55,33 @@ func move_player_to_room(body):
 			main_character.position = down_room.up_door.global_position
 		main_character.start_door_timer()
 
+#test whether on not a cell can be placed next to this cell given a dirction
+func is_compatible_with(room) -> bool:
+	var first_socket
+	var second_socket
+	var grid_pos = grid_position
+	var new_room_grid_pos = room.grid_position
+	var direction = new_room_grid_pos - grid_pos
+	match(direction):
+		Vector2.RIGHT:
+			first_socket = right_socket
+			second_socket = room.left_socket
+		Vector2.DOWN:
+			first_socket = down_socket
+			second_socket = room.up_socket
+		Vector2.LEFT:
+			first_socket = left_socket
+			second_socket = room.right_socket
+		Vector2.UP:
+			first_socket = up_socket
+			second_socket = room.down_socket
+	if(first_socket == second_socket):
+		return true
+	elif(second_socket == null):
+		return true
+	else:
+		return false
+
 #if the player enters the room, contains_player is true
 func _on_area_2d_body_entered(body):
 	if(body == main_character):
@@ -64,7 +97,7 @@ func _on_area_2d_body_exited(body):
 #gets a reference to player as soon as the scene enters the main tree
 #also connects the player_entered signal to dungeon_controller and
 #sets references for all doors
-func _on_area_2d_tree_entered():
+func _on_tree_entered():
 	main_character = get_parent().get_parent().get_child(2)
 	for door in $Doors.get_children():
 		door.body_entered.connect(move_player_to_room)
@@ -72,5 +105,3 @@ func _on_area_2d_tree_entered():
 	left_door = $Doors/LeftDoor
 	up_door = $Doors/UpDoor
 	down_door = $Doors/DownDoor
-
-

@@ -26,6 +26,8 @@ position = Vector2(-132, -86)
 offset = Vector2(140, 85)
 enabled = false
 zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="Projectiles" type="Node2D" parent="."]
 
@@ -34,5 +36,9 @@ zoom = Vector2(4, 4)
 [node name="debug camera" type="Camera2D" parent="."]
 position = Vector2(133, 88)
 zoom = Vector2(0.5, 0.5)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.282353, 0.282353, 0.282353, 1)
+blend_mode = 1
 
 [connection signal="fire_projectile" from="MainCharacter" to="." method="_on_main_character_fire_projectile"]

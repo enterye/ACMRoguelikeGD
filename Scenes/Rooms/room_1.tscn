@@ -18,5 +18,3 @@ disabled = false
 
 [node name="CollisionShape2D" parent="Doors/RightDoor" index="0"]
 disabled = false
-
-[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

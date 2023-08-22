@@ -1,6 +1,5 @@
 extends "res://Scenes/Rooms/default_room.gd"
 
-
 func _ready():
 	up_socket = CLOSED
 	down_socket = OPEN

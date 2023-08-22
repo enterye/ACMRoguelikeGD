@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://bop6r1cxe0rhh"]
+
+[ext_resource type="Texture2D" uid="uid://b3dr1tml71fjf" path="res://ART/OBJECTS/torch.png" id="1_he7v5"]
+[ext_resource type="Texture2D" uid="uid://4k8w3dhmqrqi" path="res://ART/EFFECTS/stolen effect.png" id="2_otei7"]
+
+[sub_resource type="Animation" id="Animation_117w6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.15]
+}
+
+[sub_resource type="Animation" id="Animation_homwl"]
+resource_name = "flicker"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [4.0, 2.0, 4.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7cd3o"]
+_data = {
+"RESET": SubResource("Animation_117w6"),
+"flicker": SubResource("Animation_homwl")
+}
+
+[node name="Torch" type="Node2D"]
+
+[node name="Torch" type="Sprite2D" parent="."]
+texture = ExtResource("1_he7v5")
+hframes = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.25098, 0.109804, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("2_otei7")
+texture_scale = 4.15
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7cd3o")
+}

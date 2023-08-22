@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://1wonofaummhj"]
+[gd_scene load_steps=10 format=3 uid="uid://1wonofaummhj"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/main_character.gd" id="1_oi4h5"]
 [ext_resource type="Texture2D" uid="uid://c6gowvf1ybfd8" path="res://ART/CHARACTERS/MainCharacter2.png" id="2_sx2th"]
@@ -52,6 +52,9 @@ _data = {
 "walk": SubResource("Animation_u8w6g")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_83rxm"]
+polygon = PackedVector2Array(-5, 12, 0, 12, 0, 7, 2, 7, 2, 12, 6, 12, 6, -12, 5, -12, 5, -13, 3, -13, 3, -14, -3, -14, -3, -13, -5, -13, -5, -12, -6, -12, -6, -11, -7, -11, -7, -10, -8, -10, -8, -8, -6, -8, -6, -9, -5, -9, -5, -6, -6, -6, -6, -5, -7, -5, -7, -4, -8, -4, -8, -1, -5, -1)
+
 [node name="MainCharacter" type="CharacterBody2D"]
 collision_mask = 94
 script = ExtResource("1_oi4h5")
@@ -68,6 +71,7 @@ debug_color = Color(0.929412, 0.145098, 0.556863, 0.419608)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_abou3")
+disabled = true
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -90,6 +94,9 @@ libraries = {
 
 [node name="WeaponSpawn" type="Marker2D" parent="."]
 position = Vector2(6, -1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_83rxm")
 
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="DoorTimer" to="." method="_on_door_timer_timeout"]
