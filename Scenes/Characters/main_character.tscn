@@ -71,7 +71,6 @@ debug_color = Color(0.929412, 0.145098, 0.556863, 0.419608)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_abou3")
-disabled = true
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 texture_filter = 1

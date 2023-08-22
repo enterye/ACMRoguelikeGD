@@ -24,7 +24,6 @@ position = Vector2(132, 86)
 [node name="Camera2D" type="Camera2D" parent="MainCharacter"]
 position = Vector2(-132, -86)
 offset = Vector2(140, 85)
-enabled = false
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
@@ -35,6 +34,7 @@ position_smoothing_speed = 10.0
 
 [node name="debug camera" type="Camera2D" parent="."]
 position = Vector2(133, 88)
+enabled = false
 zoom = Vector2(0.5, 0.5)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]

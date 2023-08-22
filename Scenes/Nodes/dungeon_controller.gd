@@ -104,6 +104,7 @@ func collapse_center_cell(this_cell):
 	room.position = this_cell.position * CELLSIZE
 	room.grid_position = this_cell.position
 	room.room_entered.connect(_on_new_room_entered)
+	current_room = room
 	
 	room_count += 1
 	add_child(room)
@@ -219,5 +220,18 @@ func initialize_cell_grid():
 
 
 func _on_room_added(this_room):
-	pass
-	#print("room added!")
+	var direction = this_room.grid_position - current_room.grid_position
+	print(direction)
+	match(direction):
+		Vector2.RIGHT:
+			this_room.left_room = current_room
+			current_room.right_room = this_room
+		Vector2.DOWN:
+			this_room.up_room = current_room
+			current_room.down_room = this_room
+		Vector2.LEFT:
+			this_room.right_room = current_room
+			current_room.left_room = this_room
+		Vector2.UP:
+			this_room.down_room = current_room
+			current_room.up_room = this_room
