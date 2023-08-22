@@ -1,6 +1,6 @@
 extends Node2D
 
-signal room_entered(room)
+signal room_entered(room, cell)
 
 #these are for the sockets
 const OPEN = 1
@@ -30,6 +30,9 @@ var right_room
 var down_room
 var left_room
 var up_room
+
+#reference to owner cell
+var owner_cell
 
 #references to doors
 var right_door
@@ -85,7 +88,7 @@ func is_compatible_with(room) -> bool:
 #if the player enters the room, contains_player is true
 func _on_area_2d_body_entered(body):
 	if(body == main_character):
-		room_entered.emit(self)
+		room_entered.emit(self, owner_cell)
 		contains_player = true
 		player_visited = true
 

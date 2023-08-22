@@ -33,6 +33,7 @@ var direction_dictionary = {
 
 var current_room
 
+var current_cell
 #array of spaces that already have rooms
 
 #cell class
@@ -79,12 +80,21 @@ var cap_room_master_list = [cap_room_up, cap_room_down, cap_room_right, cap_room
 
 var test_list = [room_1, room_2]
 #sets current room
-func _on_new_room_entered(room):
+func _on_new_room_entered(room, owner_cell):
 	current_room = room
 	current_cell_pos = room.grid_position
+
+	current_cell = owner_cell
+	
 	#generates new rooms upon entering a room for the first time
 	if(current_room.player_visited == false):
-		pass
+		var adjacent_cells = get_adjacent_cells(current_cell)
+		for cells in adjacent_cells:
+			if cells != null:
+				update_cell_possible_rooms(cells)
+		for cells in adjacent_cells:
+			if cells != null:
+				collapse_cell(cells)
 
 #creates the starting room, connects it to _on_new_room_entered, and generates adjacent rooms
 func _ready():
@@ -106,20 +116,21 @@ func collapse_center_cell(this_cell):
 	room.room_entered.connect(_on_new_room_entered)
 	current_room = room
 	
+	room.owner_cell = this_cell
+	this_cell.stored_tile = room
+	this_cell.collapsed = true
+	
 	room_count += 1
 	add_child(room)
 	
 	var adjacent_cells = get_adjacent_cells(this_cell)
 
 	for cells in adjacent_cells:
-		update_cell_possible_rooms(cells, room)
+		if cells != null:
+			update_cell_possible_rooms(cells)
 	for cells in adjacent_cells:
-		collapse_cell(cells)
-	
-	var cell_index = cell_list.find(this_cell)
-	cell_list.erase(this_cell)
-	cell_list.insert(cell_index, null)
-	this_cell.queue_free()
+		if cells != null:
+			collapse_cell(cells)
 
 #collapses a cell by choosing a random room within it's array
 func collapse_cell(this_cell):
@@ -131,69 +142,101 @@ func collapse_cell(this_cell):
 	room.grid_position = this_cell.position
 	room.room_entered.connect(_on_new_room_entered)
 	
+	room.owner_cell = this_cell
+	this_cell.stored_tile = room
+	this_cell.collapsed = true
+	
 	room_count += 1
 	add_child(room)
 	
 	room_added.emit(room)
-	var cell_index = cell_list.find(this_cell)
-	cell_list.erase(this_cell)
-	cell_list.insert(cell_index, null)
-	this_cell.queue_free()
 
-#returns a list of the cells adjacent to this one
-func get_adjacent_cells(this_cell) -> Array:
-	var adjacent_cells = []
+#given a cell, return it's adjacent rooms
+func get_adjacent_rooms(this_cell) -> Array:
+	var adjacent_rooms = []
 	var this_cell_position = cell_list.find(this_cell)
 	var cell_right
 	var cell_down
 	var cell_left
 	var cell_up
+	var room_right
+	var room_down
+	var room_left
+	var room_up
+	
 	if this_cell_position + 1 < 49: #right cell
 		cell_right = cell_list[this_cell_position + 1]
-		adjacent_cells.append(cell_right)
-	else:
-		adjacent_cells.append(null)
+		if cell_right.collapsed:
+			room_right = cell_right.stored_tile
+			adjacent_rooms.append(room_right)
 	if this_cell_position + 7 < 49: #down cell
 		cell_down = cell_list[this_cell_position + 7]
-		adjacent_cells.append(cell_down)
-	else:
-		adjacent_cells.append(null)
+		if cell_down.collapsed:
+			room_down = cell_down.stored_tile
+			adjacent_rooms.append(room_down)
 	if this_cell_position - 1 > -1: #left cell
 		cell_left = cell_list[this_cell_position - 1]
-		adjacent_cells.append(cell_left)
-	else:
-		adjacent_cells.append(null)
+		if cell_left.collapsed:
+			room_left = cell_left.stored_tile
+			adjacent_rooms.append(room_left)
 	if this_cell_position - 7 > -1: #up cell
 		cell_up = cell_list[this_cell_position - 7]
-		adjacent_cells.append(cell_up)
-	else:
-		adjacent_cells.append(null)
+		if cell_up.collapsed:
+			room_up = cell_up.stored_tile
+			adjacent_rooms.append(room_up)
+	
+	print(adjacent_rooms)
+	return adjacent_rooms
+
+#returns a list of the cells adjacent to this one
+func get_adjacent_cells(this_cell) -> Array:
+	var adjacent_cells = []
+	var this_cell_position = cell_list.find(this_cell)
+	
+	var cell_right = null
+	var cell_down = null
+	var cell_left = null
+	var cell_up = null
+	
+	if this_cell_position + 1 < 49: #right cell
+		cell_right = cell_list[this_cell_position + 1]
+		if cell_right.collapsed == true:
+			cell_right = null
+	if this_cell_position + 7 < 49: #down cell
+		cell_down = cell_list[this_cell_position + 7]
+		if cell_down.collapsed == true:
+			cell_down = null
+	if this_cell_position - 1 > -1: #left cell
+		cell_left = cell_list[this_cell_position - 1]
+		if cell_left.collapsed == true:
+			cell_left = null
+	if this_cell_position - 7 > -1: #up cell
+		cell_up = cell_list[this_cell_position - 7]
+		if cell_up.collapsed == true:
+			cell_up = null
+			
+	adjacent_cells = [cell_right, cell_left, cell_down, cell_up]
 	return adjacent_cells
 
 #currently this only works from the direction of the room the player is in
 #needs logic so that it updates tiles in every direction
 #given a cell, update it's possible rooms
-func update_cell_possible_rooms(updating_cell, test_from_room):
+func update_cell_possible_rooms(updating_cell):
+	#print(updating_cell)
 	var new_list = updating_cell.possible_tiles.duplicate()
 	#get adjacent rooms and save as null if there is none
-	#do the same test but with all directions instead of just one
+	var adjacent_rooms = get_adjacent_rooms(updating_cell)
 	
 	for tile in updating_cell.possible_tiles:
 		var test_to_room = tile.instantiate()
 		test_to_room.grid_position = updating_cell.position
 		test_to_room.position = Vector2(20000,20000)
 		add_child(test_to_room)
-		if(test_from_room.is_compatible_with(test_to_room) == false):
-			new_list.erase(tile)
-		#more if statements that do the same test but for other rooms	
-		#if(right_room.is_compatible_with(test_to_room) == false)
-		test_to_room.queue_free()
+		for room in adjacent_rooms:
+			if(room.is_compatible_with(test_to_room) == false):
+				new_list.erase(tile)
+			test_to_room.queue_free()
 	updating_cell.updateTiles(new_list)
-	
-
-#gets adjacent rooms
-func get_adjacent_rooms():
-	pass
 
 #initalizes a grid of cells that will be used to generate the dungeon
 func initialize_cell_grid():
@@ -221,7 +264,6 @@ func initialize_cell_grid():
 
 func _on_room_added(this_room):
 	var direction = this_room.grid_position - current_room.grid_position
-	print(direction)
 	match(direction):
 		Vector2.RIGHT:
 			this_room.left_room = current_room
