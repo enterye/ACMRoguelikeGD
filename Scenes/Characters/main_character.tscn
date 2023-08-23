@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://1wonofaummhj"]
+[gd_scene load_steps=11 format=3 uid="uid://1wonofaummhj"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/main_character.gd" id="1_oi4h5"]
 [ext_resource type="Texture2D" uid="uid://c6gowvf1ybfd8" path="res://ART/CHARACTERS/MainCharacter2.png" id="2_sx2th"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4r4pr"]
-size = Vector2(14, 26)
+[ext_resource type="Texture2D" uid="uid://clkrc5bwgxd5l" path="res://ART/WEAPONS/sword.png" id="3_aqaos"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abou3"]
 radius = 5.0
 height = 26.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2myl0"]
+size = Vector2(14, 26)
 
 [sub_resource type="Animation" id="Animation_t7ovf"]
 length = 0.001
@@ -56,21 +57,21 @@ _data = {
 polygon = PackedVector2Array(-5, 12, 0, 12, 0, 7, 2, 7, 2, 12, 6, 12, 6, -12, 5, -12, 5, -13, 3, -13, 3, -14, -3, -14, -3, -13, -5, -13, -5, -12, -6, -12, -6, -11, -7, -11, -7, -10, -8, -10, -8, -8, -6, -8, -6, -9, -5, -9, -5, -6, -6, -6, -6, -5, -7, -5, -7, -4, -8, -4, -8, -1, -5, -1)
 
 [node name="MainCharacter" type="CharacterBody2D"]
-collision_mask = 94
+collision_mask = 118
 script = ExtResource("1_oi4h5")
 
-[node name="DoorDetector" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorDetector"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_4r4pr")
-debug_color = Color(0.929412, 0.145098, 0.556863, 0.419608)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collisions" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_abou3")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_2myl0")
+debug_color = Color(0.921569, 0.133333, 0.596078, 0.419608)
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -80,9 +81,6 @@ hframes = 3
 
 [node name="FireRate" type="Timer" parent="."]
 wait_time = 0.5
-one_shot = true
-
-[node name="DoorTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -97,5 +95,14 @@ position = Vector2(6, -1)
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_83rxm")
 
+[node name="WeaponHand" type="Marker2D" parent="."]
+visible = false
+position = Vector2(-6, 4)
+
+[node name="SwordSprite" type="Sprite2D" parent="WeaponHand"]
+visible = false
+position = Vector2(18, 1)
+texture = ExtResource("3_aqaos")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
-[connection signal="timeout" from="DoorTimer" to="." method="_on_door_timer_timeout"]

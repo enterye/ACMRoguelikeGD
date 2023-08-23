@@ -75,10 +75,12 @@ fire={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Projectiles"
-2d_physics/layer_4="Level"
+2d_physics/layer_4="Enemy Hitboxes"
 2d_physics/layer_5="Items & Zones"
 2d_physics/layer_6="Room"
 2d_physics/layer_7="Objects"
+2d_physics/layer_8="EnemyHurtBoxes"
+2d_physics/layer_9="PlayerHitbox"
 
 [rendering]
 

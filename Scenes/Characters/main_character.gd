@@ -10,7 +10,6 @@ var vert_fire_dir
 var horz_fire_dir
 
 var can_fire = true
-var can_teleport = true
 var firing = false
 
 #signal to the level that the player wants to fire a projectile.
@@ -23,12 +22,6 @@ func get_overlapping_areas():
 		return $DoorDetector.get_overlapping_areas()[0]
 	else:
 		return null
-
-#cooldown for teleporting
-func start_door_timer():
-	if can_teleport:
-		can_teleport = false
-		$DoorTimer.start()
 
 func _process(_delta):
 	#get directional input and calculate velocity
@@ -85,5 +78,6 @@ func _process(_delta):
 func _on_fire_rate_timeout():
 	can_fire = true
 
-func _on_door_timer_timeout():
-	can_teleport = true
+
+func _on_hitbox_area_entered(_area):
+	print("player took damage")

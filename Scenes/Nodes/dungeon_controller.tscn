@@ -4,5 +4,3 @@
 
 [node name="DungeonController" type="Node2D"]
 script = ExtResource("1_adtgq")
-
-[connection signal="room_added" from="." to="." method="_on_room_added"]

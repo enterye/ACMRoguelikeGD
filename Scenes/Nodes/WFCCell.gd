@@ -5,11 +5,11 @@ var possible_tiles: Array = []
 var entropy
 var stored_tile
 
-func createCell(collapsed_state: bool, tiles: Array):
+func create_cell(collapsed_state: bool, tiles: Array):
 	collapsed = collapsed_state
 	possible_tiles = tiles
 	entropy = tiles.size()
 
-func updateTiles(tiles: Array):
+func update_tiles(tiles: Array):
 	possible_tiles = tiles
 	entropy = tiles.size()
