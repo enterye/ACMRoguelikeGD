@@ -58,6 +58,7 @@ polygon = PackedVector2Array(-5, 12, 0, 12, 0, 7, 2, 7, 2, 12, 6, 12, 6, -12, 5,
 
 [node name="MainCharacter" type="CharacterBody2D"]
 collision_mask = 118
+platform_floor_layers = 4294901760
 script = ExtResource("1_oi4h5")
 
 [node name="Collisions" type="CollisionShape2D" parent="."]

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c88vp8neqrqwx" path="res://ART/TILESETS/Dungeon tileset.png" id="1_oo40q"]
 [ext_resource type="PackedScene" uid="uid://1wonofaummhj" path="res://Scenes/Characters/main_character.tscn" id="2_yymg6"]
 [ext_resource type="PackedScene" uid="uid://bxqyja0bscglp" path="res://Scenes/Nodes/dungeon_controller.tscn" id="3_3f8qe"]
-[ext_resource type="PackedScene" uid="uid://b62ekj4hpuqhh" path="res://Scenes/Rooms/room_0.tscn" id="4_5ur02"]
+[ext_resource type="PackedScene" uid="uid://bcmqjj47tsglk" path="res://Scenes/Rooms/room_0.tscn" id="4_5ur02"]
 [ext_resource type="PackedScene" uid="uid://dpxg1l4onan1b" path="res://Scenes/Characters/Enemies/slime.tscn" id="6_3qsb4"]
 
 [node name="Level" type="Node2D"]
@@ -20,6 +20,9 @@ region_rect = Rect2(47, 64, 17, 16)
 [node name="DungeonController" parent="." instance=ExtResource("3_3f8qe")]
 
 [node name="Node2D" parent="DungeonController" instance=ExtResource("4_5ur02")]
+
+[node name="Slime" parent="." instance=ExtResource("6_3qsb4")]
+position = Vector2(-85, 100)
 
 [node name="MainCharacter" parent="." instance=ExtResource("2_yymg6")]
 texture_filter = 1
@@ -44,8 +47,5 @@ zoom = Vector2(0.5, 0.5)
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.282353, 0.282353, 0.282353, 1)
 blend_mode = 1
-
-[node name="Slime" parent="." instance=ExtResource("6_3qsb4")]
-position = Vector2(-85, 100)
 
 [connection signal="fire_projectile" from="MainCharacter" to="." method="_on_main_character_fire_projectile"]
