@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbywy85fg51r7"]
+[gd_scene load_steps=10 format=3 uid="uid://cbywy85fg51r7"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_mkk7w"]
 [ext_resource type="Texture2D" uid="uid://c88vp8neqrqwx" path="res://ART/TILESETS/Dungeon tileset.png" id="1_oo40q"]
 [ext_resource type="PackedScene" uid="uid://1wonofaummhj" path="res://Scenes/Characters/main_character.tscn" id="2_yymg6"]
 [ext_resource type="PackedScene" uid="uid://bxqyja0bscglp" path="res://Scenes/Nodes/dungeon_controller.tscn" id="3_3f8qe"]
-[ext_resource type="PackedScene" uid="uid://bcmqjj47tsglk" path="res://Scenes/Rooms/room_0.tscn" id="4_5ur02"]
+[ext_resource type="PackedScene" uid="uid://cw4tfva2l74tb" path="res://Scenes/Levels/test_level.tscn" id="4_1fjrg"]
+[ext_resource type="PackedScene" uid="uid://dcn6dwct8ibcu" path="res://Scenes/Objects/chest.tscn" id="5_p7vxe"]
 [ext_resource type="PackedScene" uid="uid://dpxg1l4onan1b" path="res://Scenes/Characters/Enemies/slime.tscn" id="6_3qsb4"]
 [ext_resource type="PackedScene" uid="uid://bcd114onmro4v" path="res://Scenes/Items/rune_default.tscn" id="6_foyy1"]
 [ext_resource type="PackedScene" uid="uid://32xkbfbhgx5l" path="res://Scenes/Items/speed_rune.tscn" id="7_hvij4"]
@@ -21,18 +22,24 @@ region_rect = Rect2(47, 64, 17, 16)
 
 [node name="DungeonController" parent="." instance=ExtResource("3_3f8qe")]
 
-[node name="Node2D" parent="DungeonController" instance=ExtResource("4_5ur02")]
+[node name="Node2D" parent="DungeonController" instance=ExtResource("4_1fjrg")]
+
+[node name="Chest" parent="DungeonController" instance=ExtResource("5_p7vxe")]
+position = Vector2(254, -217)
+
+[node name="Chest2" parent="DungeonController" instance=ExtResource("5_p7vxe")]
+position = Vector2(581, -270)
 
 [node name="enemies" type="Node2D" parent="."]
 
 [node name="Slime" parent="enemies" instance=ExtResource("6_3qsb4")]
-position = Vector2(-85, 100)
+position = Vector2(-262, -489)
 
 [node name="Slime2" parent="enemies" instance=ExtResource("6_3qsb4")]
-position = Vector2(-97, 132)
+position = Vector2(-302, 150)
 
 [node name="Slime4" parent="enemies" instance=ExtResource("6_3qsb4")]
-position = Vector2(-56, 128)
+position = Vector2(386, -412)
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -41,11 +48,11 @@ visible = false
 position = Vector2(265, 112)
 
 [node name="Speed_Rune" parent="Items" instance=ExtResource("7_hvij4")]
-position = Vector2(135, 1)
+position = Vector2(67, 58)
 
 [node name="MainCharacter" parent="." instance=ExtResource("2_yymg6")]
 texture_filter = 1
-position = Vector2(132, 86)
+position = Vector2(132, -46)
 
 [node name="Camera2D" type="Camera2D" parent="MainCharacter"]
 position = Vector2(-132, -86)
