@@ -72,6 +72,45 @@ color_ramp = SubResource("GradientTexture1D_iyp2q")
 [sub_resource type="CircleShape2D" id="CircleShape2D_ld274"]
 radius = 166.46
 
+[sub_resource type="Animation" id="Animation_c55j1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SlimeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Collisions:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_rtnic"]
 resource_name = "die"
 length = 2.0
@@ -294,45 +333,6 @@ tracks/8/keys = {
 "values": [Vector2(0, 0), Vector2(0, -7), Vector2(0, -14), Vector2(0, -7), Vector2(0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_c55j1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SlimeSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.151844]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Collisions:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_exshs"]
 resource_name = "knockback"
 length = 0.5
@@ -389,6 +389,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:can_jump")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ipeqk"]
 _data = {
@@ -399,11 +411,11 @@ _data = {
 }
 
 [node name="Slime" type="CharacterBody2D"]
-rotation = -0.151844
 collision_layer = 2
 collision_mask = 39
 platform_floor_layers = 4294901760
 script = ExtResource("1_k610l")
+can_jump = false
 
 [node name="Collisions" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -411,7 +423,6 @@ shape = SubResource("CapsuleShape2D_e3hxr")
 disabled = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2(0, 1)
 collision_layer = 128
 collision_mask = 256
 
@@ -470,7 +481,6 @@ hframes = 7
 frame = 1
 
 [node name="DetectionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]

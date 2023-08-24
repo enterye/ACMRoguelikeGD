@@ -89,7 +89,7 @@ func _on_hitbox_area_entered(_area):
 
 func _on_item_pick_up_zone_area_entered(area):
 	print(area)
-	var rune = get_node(area.get_path()).self_reference.instantiate()
+	var rune = get_node(area.get_path()).get_reference().instantiate()
 	area.destroy_rune()
 	rune.inventory_version()
 	$Items.call_deferred("add_child",rune)

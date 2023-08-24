@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbywy85fg51r7"]
+[gd_scene load_steps=9 format=3 uid="uid://cbywy85fg51r7"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_mkk7w"]
 [ext_resource type="Texture2D" uid="uid://c88vp8neqrqwx" path="res://ART/TILESETS/Dungeon tileset.png" id="1_oo40q"]
 [ext_resource type="PackedScene" uid="uid://1wonofaummhj" path="res://Scenes/Characters/main_character.tscn" id="2_yymg6"]
 [ext_resource type="PackedScene" uid="uid://bxqyja0bscglp" path="res://Scenes/Nodes/dungeon_controller.tscn" id="3_3f8qe"]
-[ext_resource type="PackedScene" uid="uid://b62ekj4hpuqhh" path="res://Scenes/Rooms/room_0.tscn" id="4_5ur02"]
+[ext_resource type="PackedScene" uid="uid://bcmqjj47tsglk" path="res://Scenes/Rooms/room_0.tscn" id="4_5ur02"]
 [ext_resource type="PackedScene" uid="uid://dpxg1l4onan1b" path="res://Scenes/Characters/Enemies/slime.tscn" id="6_3qsb4"]
 [ext_resource type="PackedScene" uid="uid://bcd114onmro4v" path="res://Scenes/Items/rune_default.tscn" id="6_foyy1"]
+[ext_resource type="PackedScene" uid="uid://32xkbfbhgx5l" path="res://Scenes/Items/speed_rune.tscn" id="7_hvij4"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_mkk7w")
@@ -36,7 +37,11 @@ position = Vector2(-56, 128)
 [node name="Items" type="Node2D" parent="."]
 
 [node name="Rune_Default" parent="Items" instance=ExtResource("6_foyy1")]
+visible = false
 position = Vector2(265, 112)
+
+[node name="Speed_Rune" parent="Items" instance=ExtResource("7_hvij4")]
+position = Vector2(135, 1)
 
 [node name="MainCharacter" parent="." instance=ExtResource("2_yymg6")]
 texture_filter = 1

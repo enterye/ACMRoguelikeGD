@@ -17,7 +17,9 @@ func _ready():
 	$Hurtbox/CollisionShape2D.disabled = false
 	$Death.emitting = false
 	$SlimeSprite.frame = 1
+	$DetectionArea/CollisionShape2D.disabled = false
 	$Hitbox/CollisionShape2D.disabled = false
+	can_jump = true
 	main_character = get_owner().find_child("MainCharacter")
 	rotation = 0
 
@@ -27,9 +29,10 @@ func _process(_delta):
 		"idle":
 			pass
 		"attack":
-			$AnimationPlayer.play("jump")
+			if can_jump:
+				$AnimationPlayer.play("jump")
 		"damage":
-			$AnimationPlayer.play("knockback")
+			pass
 		"dead":
 			pass
 			
@@ -42,6 +45,7 @@ func _on_hitbox_area_entered(area):
 		health -= 50
 		state = "damage"
 		apply_knockback(area)
+		$AnimationPlayer.play("knockback")
 		if health < 1:
 			die()
 
@@ -78,4 +82,5 @@ func stop_jump() -> void:
 
 #changes the slimes state from "idle" to "attack"
 func _on_detection_area_body_entered(_body) -> void:
+	print("detected")
 	state = "attack"
