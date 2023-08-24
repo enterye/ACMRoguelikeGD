@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://b16v3lddxp8sx"]
 
 [ext_resource type="Script" path="res://Scenes/Projectiles/DefaultProjectile.gd" id="1_pm8my"]
 [ext_resource type="Texture2D" uid="uid://dlm1b0rwyrbs7" path="res://ART/PROJECTILES/NormalProjectile.png" id="2_ifbcf"]
@@ -29,7 +29,7 @@ color_ramp = SubResource("GradientTexture1D_jxh3o")
 
 [node name="DefaultProjectile" type="Area2D"]
 collision_layer = 4
-collision_mask = 74
+collision_mask = 106
 script = ExtResource("1_pm8my")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

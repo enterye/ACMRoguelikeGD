@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
-const SPEED = 100
+var speed = 100
 
 var direction: Vector2
 var fire_direction: Vector2
 var pos
+
+var health = 100
 
 var vert_fire_dir
 var horz_fire_dir
@@ -26,7 +28,7 @@ func get_overlapping_areas():
 func _process(_delta):
 	#get directional input and calculate velocity
 	direction = Input.get_vector("move_left","move_right","move_up","move_down").normalized()
-	velocity = direction * SPEED
+	velocity = direction * speed
 	
 	#controls sprite animation
 	if(direction):
@@ -80,4 +82,20 @@ func _on_fire_rate_timeout():
 
 
 func _on_hitbox_area_entered(_area):
-	print("player took damage")
+	health -= 10
+	print(health)
+	if health < 1:
+		print("DEATH")
+
+func _on_item_pick_up_zone_area_entered(area):
+	print(area)
+	var rune = get_node(area.get_path()).self_reference.instantiate()
+	area.destroy_rune()
+	rune.inventory_version()
+	$Items.call_deferred("add_child",rune)
+
+	print(rune)
+
+#when an item is added to the item tree
+func _on_items_child_entered_tree(node):
+	node.apply_effect()

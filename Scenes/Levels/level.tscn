@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbywy85fg51r7"]
+[gd_scene load_steps=8 format=3 uid="uid://cbywy85fg51r7"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_mkk7w"]
 [ext_resource type="Texture2D" uid="uid://c88vp8neqrqwx" path="res://ART/TILESETS/Dungeon tileset.png" id="1_oo40q"]
 [ext_resource type="PackedScene" uid="uid://1wonofaummhj" path="res://Scenes/Characters/main_character.tscn" id="2_yymg6"]
 [ext_resource type="PackedScene" uid="uid://bxqyja0bscglp" path="res://Scenes/Nodes/dungeon_controller.tscn" id="3_3f8qe"]
-[ext_resource type="PackedScene" uid="uid://bcmqjj47tsglk" path="res://Scenes/Rooms/room_0.tscn" id="4_5ur02"]
+[ext_resource type="PackedScene" uid="uid://b62ekj4hpuqhh" path="res://Scenes/Rooms/room_0.tscn" id="4_5ur02"]
 [ext_resource type="PackedScene" uid="uid://dpxg1l4onan1b" path="res://Scenes/Characters/Enemies/slime.tscn" id="6_3qsb4"]
+[ext_resource type="PackedScene" uid="uid://bcd114onmro4v" path="res://Scenes/Items/rune_default.tscn" id="6_foyy1"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_mkk7w")
@@ -21,8 +22,21 @@ region_rect = Rect2(47, 64, 17, 16)
 
 [node name="Node2D" parent="DungeonController" instance=ExtResource("4_5ur02")]
 
-[node name="Slime" parent="." instance=ExtResource("6_3qsb4")]
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="Slime" parent="enemies" instance=ExtResource("6_3qsb4")]
 position = Vector2(-85, 100)
+
+[node name="Slime2" parent="enemies" instance=ExtResource("6_3qsb4")]
+position = Vector2(-97, 132)
+
+[node name="Slime4" parent="enemies" instance=ExtResource("6_3qsb4")]
+position = Vector2(-56, 128)
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Rune_Default" parent="Items" instance=ExtResource("6_foyy1")]
+position = Vector2(265, 112)
 
 [node name="MainCharacter" parent="." instance=ExtResource("2_yymg6")]
 texture_filter = 1
