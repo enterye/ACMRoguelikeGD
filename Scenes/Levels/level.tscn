@@ -25,6 +25,15 @@ region_rect = Rect2(47, 64, 17, 16)
 
 [node name="Node2D" parent="DungeonController" instance=ExtResource("4_1fjrg")]
 
+[node name="Chest" parent="DungeonController/Node2D" instance=ExtResource("5_p7vxe")]
+position = Vector2(318, -225)
+
+[node name="Chest2" parent="DungeonController/Node2D" instance=ExtResource("5_p7vxe")]
+position = Vector2(429, -223)
+
+[node name="Chest3" parent="DungeonController/Node2D" instance=ExtResource("5_p7vxe")]
+position = Vector2(380, -222)
+
 [node name="Chest" parent="DungeonController" instance=ExtResource("5_p7vxe")]
 position = Vector2(254, -217)
 
