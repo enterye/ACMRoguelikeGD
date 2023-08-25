@@ -6,6 +6,6 @@
 [node name="Speed_Rune" instance=ExtResource("1_kqr2r")]
 script = ExtResource("2_et0mt")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 modulate = Color(0.454902, 0, 0.458824, 1)
 position = Vector2(7.98702e-06, -0.500004)

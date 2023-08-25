@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
 var speed = 100
+var damage_delt = 50
 
 var direction: Vector2
 var fire_direction: Vector2
 var pos
 
 var health = 100
+
+var fire_rate = 0.5
 
 var vert_fire_dir
 var horz_fire_dir
@@ -95,6 +98,10 @@ func _on_item_pick_up_zone_area_entered(area):
 	$Items.call_deferred("add_child",rune)
 
 	print(rune)
+
+func set_fire_rate(new_rate):
+	fire_rate = new_rate
+	$FireRate.wait_time = fire_rate
 
 #when an item is added to the item tree
 func _on_items_child_entered_tree(node):

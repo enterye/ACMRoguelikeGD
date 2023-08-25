@@ -18,5 +18,4 @@ func destroy_rune():
 	$AnimationPlayer.play("on_pickup")
 	
 func apply_effect():
-	var player = get_parent().get_parent()
 	print("rune has no effect")

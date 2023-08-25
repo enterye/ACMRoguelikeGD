@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var state = "idle"
 
-var health = 100
+var health = 150
 
 var main_character
 
@@ -42,7 +42,7 @@ func _process(_delta):
 #below 1
 func _on_hitbox_area_entered(area):
 	if "state" != "damage":
-		health -= 50
+		health -= main_character.damage_delt
 		state = "damage"
 		apply_knockback(area)
 		$AnimationPlayer.play("knockback")
@@ -78,9 +78,8 @@ func apply_knockback(area) -> void:
 
 #helper function for the animation player, bring the slime's velocity down smoothly
 func stop_jump() -> void:
-	velocity = velocity * .25
+	velocity = velocity * .15
 
 #changes the slimes state from "idle" to "attack"
 func _on_detection_area_body_entered(_body) -> void:
-	print("detected")
 	state = "attack"

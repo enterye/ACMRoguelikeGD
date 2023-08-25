@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbfvfd2s28fit"]
+
+[ext_resource type="PackedScene" uid="uid://bcd114onmro4v" path="res://Scenes/Items/rune_default.tscn" id="1_imexf"]
+[ext_resource type="Script" path="res://Scenes/Items/Rate_Rune.gd" id="2_ws6jb"]
+
+[node name="Rate_Rune" instance=ExtResource("1_imexf")]
+script = ExtResource("2_ws6jb")
+
+[node name="Sprite2D" parent="." index="2"]
+modulate = Color(0.913725, 0.592157, 0, 1)
