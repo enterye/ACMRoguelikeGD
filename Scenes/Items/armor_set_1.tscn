@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm704oo2kxky3"]
+
+[ext_resource type="PackedScene" uid="uid://bcd114onmro4v" path="res://Scenes/Items/rune_default.tscn" id="1_6meks"]
+[ext_resource type="Script" path="res://Scenes/Items/ArmorSet1.gd" id="2_fkx0g"]
+
+[node name="ArmorSet1" instance=ExtResource("1_6meks")]
+script = ExtResource("2_fkx0g")
+
+[node name="Sprite2D" parent="." index="2"]
+modulate = Color(0.2, 0.941176, 0, 1)

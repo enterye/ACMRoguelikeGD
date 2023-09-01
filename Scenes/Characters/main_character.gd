@@ -17,6 +17,8 @@ var horz_fire_dir
 var can_fire = true
 var firing = false
 
+var armorset0: Texture2D = load("res://ART/CHARACTERS/MainCharacter2.png")
+
 #signal to the level that the player wants to fire a projectile.
 #this signal passes the direction and position of the player
 signal fire_projectile(fire_dir, pos, rot)
@@ -31,12 +33,14 @@ func get_overlapping_areas():
 func _process(_delta):
 	#get directional input and calculate velocity
 	direction = Input.get_vector("move_left","move_right","move_up","move_down").normalized()
-	velocity = direction * speed
 	
 	#controls sprite animation
 	if(direction):
+		velocity = direction * speed
 		$AnimationPlayer.play("walk")
 	else:
+		velocity = Vector2.ZERO
+		$AnimationPlayer.play("RESET")
 		$CharacterSprite.frame = 2 #frame 2 is idle stance
 	
 	#decides the initial firing direction before deciding which one to use below
@@ -102,6 +106,12 @@ func _on_item_pick_up_zone_area_entered(area):
 func set_fire_rate(new_rate):
 	fire_rate = new_rate
 	$FireRate.wait_time = fire_rate
+
+func scale_animation_speed(speedscale):
+	$AnimationPlayer.speed_scale = $AnimationPlayer.speed_scale * speedscale
+
+func set_texture(texture):
+	$CharacterSprite.set_texture(texture)
 
 #when an item is added to the item tree
 func _on_items_child_entered_tree(node):

@@ -1,7 +1,7 @@
 extends "res://Scenes/Items/Rune_Default.gd"
 
 func get_reference():
-	self_reference = load("res://Scenes/Items/Rate_Rune.tscn")
+	self_reference = load("res://Scenes/Items/rate_rune.tscn")
 	return self_reference
 
 func apply_effect():
