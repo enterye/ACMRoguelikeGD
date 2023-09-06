@@ -5,13 +5,14 @@ extends "res://Scenes/Items/Weapons/weapon_generic.gd"
 var attacks = ["Attack1", "Attack2"]
 @export var attack_index = 0
 
-const ANIMATION_SPEED = 0.6
+const ANIMATION_SPEED = 0.5
 const DEFAULT_DAMAGE = 100
 
 func _ready():
 	$WeaponAnimation.speed_scale = ANIMATION_SPEED
 
 func attack():
+	$WeaponAnimation.speed_scale = ANIMATION_SPEED
 	match(attack_state):
 		"idle":
 			$WeaponAnimation.play("Attack1")
@@ -23,7 +24,10 @@ func attack():
 			pass
 
 func walk():
-	$WeaponAnimation.play("walk")
+	if attack_state == "idle":
+		$WeaponAnimation.speed_scale = 0.8
+		$WeaponAnimation.play("walk")
 
 func idle():
-	$WeaponAnimation.play("RESET")
+	if attack_state == "idle":
+		$WeaponAnimation.play("RESET")

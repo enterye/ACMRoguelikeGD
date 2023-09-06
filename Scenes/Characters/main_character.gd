@@ -54,9 +54,11 @@ func _process(_delta):
 		elif(direction):
 			velocity = direction * speed
 			$AnimationPlayer.play("walk")
+			held_weapon.walk()
 		else:
 			velocity = Vector2.ZERO
 			$AnimationPlayer.play("RESET")
+			held_weapon.idle()
 			$CharacterSprite.frame = 2 #frame 2 is idle stance
 	
 	#rotates melee weapon
