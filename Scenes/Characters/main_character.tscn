@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Characters/main_character.gd" id="1_oi4h5"]
 [ext_resource type="Texture2D" uid="uid://clkwr5a1r08nb" path="res://ART/EFFECTS/generic shadow.png" id="2_gxrtg"]
 [ext_resource type="Texture2D" uid="uid://c6gowvf1ybfd8" path="res://ART/CHARACTERS/MainCharacter2.png" id="2_sx2th"]
-[ext_resource type="PackedScene" uid="uid://cbw6jwr4kkcfv" path="res://Scenes/Items/Weapons/iron_greatsword.tscn" id="4_5jqqa"]
+[ext_resource type="PackedScene" uid="uid://suf6oyv1i3mb" path="res://Scenes/Items/Weapons/iron_greatsword.tscn" id="4_5jqqa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abou3"]
 radius = 5.0

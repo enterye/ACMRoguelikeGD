@@ -95,6 +95,7 @@ enabled = false
 zoom = Vector2(0.5, 0.5)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
 color = Color(0.282353, 0.282353, 0.282353, 1)
 blend_mode = 1
 

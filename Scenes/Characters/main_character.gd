@@ -32,6 +32,7 @@ var weapon_flipped
 
 func _ready():
 	held_weapon = $WeaponHand.get_child(0)
+	damage_delt = $WeaponHand.get_child(0).DEFAULT_DAMAGE
 	melee_attack.connect(held_weapon.attack)
 
 #gets the door the player is standing in
