@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var speed = 100
 var damage_delt = 50
+var dodge_speed = 3
 
 var direction: Vector2
 var fire_direction: Vector2
@@ -14,14 +15,24 @@ var fire_rate = 0.5
 var vert_fire_dir
 var horz_fire_dir
 
-var can_fire = true
-var firing = false
+var mouse_pos
 
 var armorset0: Texture2D = load("res://ART/CHARACTERS/MainCharacter2.png")
 
 #signal to the level that the player wants to fire a projectile.
 #this signal passes the direction and position of the player
 signal fire_projectile(fire_dir, pos, rot)
+#signal for melee weapons
+signal melee_attack
+
+var held_weapon
+
+var weapon_flipped
+@export var dodging: bool = false
+
+func _ready():
+	held_weapon = $WeaponHand.get_child(0)
+	melee_attack.connect(held_weapon.attack)
 
 #gets the door the player is standing in
 func get_overlapping_areas():
@@ -31,62 +42,52 @@ func get_overlapping_areas():
 		return null
 
 func _process(_delta):
-	#get directional input and calculate velocity
+	#get directional input, mouse position, and calculate velocity
 	direction = Input.get_vector("move_left","move_right","move_up","move_down").normalized()
+	mouse_pos = get_global_mouse_position()
 	
 	#controls sprite animation
-	if(direction):
-		velocity = direction * speed
-		$AnimationPlayer.play("walk")
-	else:
-		velocity = Vector2.ZERO
-		$AnimationPlayer.play("RESET")
-		$CharacterSprite.frame = 2 #frame 2 is idle stance
+	if(dodging == false):
+		if(Input.is_action_just_pressed("dodge") and $DodgeCooldown.is_stopped()):
+			$AnimationPlayer.play("dodge")
+		elif(direction):
+			velocity = direction * speed
+			$AnimationPlayer.play("walk")
+		else:
+			velocity = Vector2.ZERO
+			$AnimationPlayer.play("RESET")
+			$CharacterSprite.frame = 2 #frame 2 is idle stance
 	
-	#decides the initial firing direction before deciding which one to use below
-	horz_fire_dir = Input.get_axis("fire_left","fire_right")
-	vert_fire_dir = Input.get_axis("fire_up","fire_down")
+	#rotates melee weapon
+	$WeaponHand.look_at(mouse_pos)
 	
-	#flips the sprite based on movement velocity
-	if(velocity.x < 0):
+	#gets input for attacking. attack state is handled by weapon
+	if Input.is_action_just_pressed("Attack"):
+		melee_attack.emit()
+	
+	#flips the sprite based mouse pos
+	if(mouse_pos.x < global_position.x):
 		$CharacterSprite.flip_h = true
 		$WeaponSpawn.position.x = -6
-	elif(velocity.x > 0):
+		$WeaponHand.position.x = 6
+		if weapon_flipped != true:
+			weapon_flipped = true
+			held_weapon.unflip()
+	elif(mouse_pos.x > global_position.x):
 		$CharacterSprite.flip_h = false
 		$WeaponSpawn.position.x = 6
-	
-	#get input for firing as well as direction
-	#having two axis as apposed to an if-else setup makes it so that if the player
-	#changes direction mid-fire they will still fire instead of stopping.
-	#another advantage of the two axis setup is that when the player pushes
-	#two opposing directions at once, firing will cease. horizontal firing always
-	#takes precedence to vertical firing. this is sort of an arbitrary decision,
-	#but one direction has to take precedence
-	if(horz_fire_dir):
-		fire_direction = Vector2(horz_fire_dir, 0)
-		firing = true
-	elif(vert_fire_dir):
-		fire_direction =  Vector2(0, vert_fire_dir)
-		firing = true
-	else:
-		firing = false
-	
-	#emits signal to fire projectile if the firerate timer isn't currently ticking
-	#also starts the firerate timer
-	if firing and can_fire:
-		$FireRate.start()
-		can_fire = false
-		
-		pos = $WeaponSpawn.global_position
-		
-		fire_projectile.emit(fire_direction, pos)
+		$WeaponHand.position.x = -6
+		if weapon_flipped != false:
+			weapon_flipped = false
+			held_weapon.flip()
 	
 	#moves the player based on veloctiy
 	move_and_slide()
 
-func _on_fire_rate_timeout():
-	can_fire = true
-
+func dodge():
+	if $DodgeCooldown.is_stopped():
+		velocity = velocity * dodge_speed
+		$DodgeCooldown.start()
 
 func _on_hitbox_area_entered(_area):
 	health -= 10
@@ -102,10 +103,6 @@ func _on_item_pick_up_zone_area_entered(area):
 	$Items.call_deferred("add_child",rune)
 
 	print(rune)
-
-func set_fire_rate(new_rate):
-	fire_rate = new_rate
-	$FireRate.wait_time = fire_rate
 
 func scale_animation_speed(speedscale):
 	$AnimationPlayer.speed_scale = $AnimationPlayer.speed_scale * speedscale

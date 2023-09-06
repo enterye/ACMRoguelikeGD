@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://1wonofaummhj"]
+[gd_scene load_steps=14 format=3 uid="uid://cd6adtjwmyrcy"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/main_character.gd" id="1_oi4h5"]
 [ext_resource type="Texture2D" uid="uid://clkwr5a1r08nb" path="res://ART/EFFECTS/generic shadow.png" id="2_gxrtg"]
 [ext_resource type="Texture2D" uid="uid://c6gowvf1ybfd8" path="res://ART/CHARACTERS/MainCharacter2.png" id="2_sx2th"]
-[ext_resource type="Texture2D" uid="uid://clkrc5bwgxd5l" path="res://ART/WEAPONS/sword.png" id="3_aqaos"]
+[ext_resource type="PackedScene" uid="uid://cbw6jwr4kkcfv" path="res://Scenes/Items/Weapons/iron_greatsword.tscn" id="4_5jqqa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abou3"]
 radius = 5.0
@@ -53,13 +53,103 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, -2)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterSprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:dodging")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_cekp4"]
+resource_name = "dodge"
+length = 0.30001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.423529), Color(1, 1, 1, 0.423529), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"dodge"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:dodging")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_7ksgl"]
 resource_name = "idle"
 
 [sub_resource type="Animation" id="Animation_u8w6g"]
 resource_name = "walk"
-length = 0.80001
+length = 0.60001
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -68,7 +158,7 @@ tracks/0/path = NodePath("CharacterSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
@@ -80,7 +170,7 @@ tracks/1/path = NodePath("CharacterSprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.5, 0.7, 0.8),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [-0.0872665, 0.0, 0.0, 0.0872665, 0.0, 0.0, -0.0872665]
@@ -92,7 +182,7 @@ tracks/2/path = NodePath("CharacterSprite:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.5, 0.7, 0.8),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, -1), Vector2(0, -2), Vector2(0, -2), Vector2(0, -1), Vector2(0, -2), Vector2(0, -2), Vector2(0, -1)]
@@ -101,6 +191,7 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jg2nk"]
 _data = {
 "RESET": SubResource("Animation_t7ovf"),
+"dodge": SubResource("Animation_cekp4"),
 "idle": SubResource("Animation_7ksgl"),
 "walk": SubResource("Animation_u8w6g")
 }
@@ -151,6 +242,7 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
+speed_scale = 0.8
 libraries = {
 "": SubResource("AnimationLibrary_jg2nk")
 }
@@ -162,17 +254,16 @@ position = Vector2(6, -1)
 occluder = SubResource("OccluderPolygon2D_83rxm")
 
 [node name="WeaponHand" type="Marker2D" parent="."]
-visible = false
-position = Vector2(-6, 4)
+position = Vector2(-6, 1)
 
-[node name="SwordSprite" type="Sprite2D" parent="WeaponHand"]
-visible = false
-position = Vector2(18, 1)
-texture = ExtResource("3_aqaos")
+[node name="IronGreatsword" parent="WeaponHand" instance=ExtResource("4_5jqqa")]
+attack_index = 0
 
 [node name="Items" type="Node2D" parent="."]
 
+[node name="DodgeCooldown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="ItemPickUpZone" to="." method="_on_item_pick_up_zone_area_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="child_entered_tree" from="Items" to="." method="_on_items_child_entered_tree"]

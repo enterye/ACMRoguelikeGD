@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1fu2g3duq6bs"]
+
+[ext_resource type="Script" path="res://Scenes/Items/Weapons/weapon_generic.gd" id="1_2pv3b"]
+
+[node name="WeaponGeneric" type="Node2D"]
+script = ExtResource("1_2pv3b")
+
+[node name="WeaponAnimation" type="AnimationPlayer" parent="."]
+
+[node name="PivotPoint" type="Marker2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="PivotPoint"]
+collision_layer = 512
+collision_mask = 12
+
+[node name="HurtboxShape" type="CollisionShape2D" parent="PivotPoint/Hurtbox"]
+
+[node name="Trail" type="Sprite2D" parent="PivotPoint"]
+modulate = Color(1, 1, 1, 0.431373)
+
+[node name="WeaponSprite" type="Sprite2D" parent="PivotPoint"]

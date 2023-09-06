@@ -1,14 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbywy85fg51r7"]
+[gd_scene load_steps=11 format=3 uid="uid://cbywy85fg51r7"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_mkk7w"]
 [ext_resource type="Texture2D" uid="uid://c88vp8neqrqwx" path="res://ART/TILESETS/Dungeon tileset.png" id="1_oo40q"]
-[ext_resource type="PackedScene" uid="uid://1wonofaummhj" path="res://Scenes/Characters/main_character.tscn" id="2_yymg6"]
+[ext_resource type="PackedScene" uid="uid://cd6adtjwmyrcy" path="res://Scenes/Characters/main_character.tscn" id="2_yymg6"]
 [ext_resource type="PackedScene" uid="uid://bxqyja0bscglp" path="res://Scenes/Nodes/dungeon_controller.tscn" id="3_3f8qe"]
 [ext_resource type="PackedScene" uid="uid://cw4tfva2l74tb" path="res://Scenes/Levels/test_level.tscn" id="4_1fjrg"]
 [ext_resource type="PackedScene" uid="uid://dcn6dwct8ibcu" path="res://Scenes/Objects/chest.tscn" id="5_p7vxe"]
 [ext_resource type="PackedScene" uid="uid://dpxg1l4onan1b" path="res://Scenes/Characters/Enemies/slime.tscn" id="6_3qsb4"]
 [ext_resource type="PackedScene" uid="uid://32xkbfbhgx5l" path="res://Scenes/Items/speed_rune.tscn" id="7_hvij4"]
-[ext_resource type="PackedScene" uid="uid://cbfvfd2s28fit" path="res://Scenes/Items/rate_rune.tscn" id="8_r806o"]
 [ext_resource type="PackedScene" uid="uid://cnpwy3elc4o7c" path="res://Scenes/Items/strength_rune.tscn" id="9_e6swc"]
 [ext_resource type="PackedScene" uid="uid://dm704oo2kxky3" path="res://Scenes/Items/armor_set_1.tscn" id="10_uk3kl"]
 
@@ -68,21 +67,6 @@ position = Vector2(386, -412)
 
 [node name="Speed_Rune" parent="Items" instance=ExtResource("7_hvij4")]
 position = Vector2(-110, -199)
-
-[node name="Rate_Rune" parent="Items" instance=ExtResource("8_r806o")]
-position = Vector2(-137, -228)
-
-[node name="Rate_Rune2" parent="Items" instance=ExtResource("8_r806o")]
-position = Vector2(-120, -227)
-
-[node name="Rate_Rune3" parent="Items" instance=ExtResource("8_r806o")]
-position = Vector2(-149, -229)
-
-[node name="Rate_Rune4" parent="Items" instance=ExtResource("8_r806o")]
-position = Vector2(-145, -243)
-
-[node name="Rate_Rune5" parent="Items" instance=ExtResource("8_r806o")]
-position = Vector2(-128, -242)
 
 [node name="Strength_Rune" parent="Items" instance=ExtResource("9_e6swc")]
 position = Vector2(-172, -194)

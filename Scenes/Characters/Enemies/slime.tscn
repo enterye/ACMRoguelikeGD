@@ -459,7 +459,7 @@ debug_color = Color(0.694118, 0.494118, 0.145098, 0.419608)
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
-collision_mask = 4
+collision_mask = 1028
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0.5, 0)
