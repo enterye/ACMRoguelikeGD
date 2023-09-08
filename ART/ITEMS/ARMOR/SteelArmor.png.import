@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clkrc5bwgxd5l"
-path="res://.godot/imported/sword.png-7d5ef2b2c351d20ba9def1e56cde89e7.ctex"
+uid="uid://b2q34pl53krir"
+path="res://.godot/imported/SteelArmor.png-255ce1a21d205249f81e3a6efd5b5670.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ART/WEAPONS/sword.png"
-dest_files=["res://.godot/imported/sword.png-7d5ef2b2c351d20ba9def1e56cde89e7.ctex"]
+source_file="res://ART/ITEMS/ARMOR/SteelArmor.png"
+dest_files=["res://.godot/imported/SteelArmor.png-255ce1a21d205249f81e3a6efd5b5670.ctex"]
 
 [params]
 

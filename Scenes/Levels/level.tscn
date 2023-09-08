@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_mkk7w"]
 [ext_resource type="Texture2D" uid="uid://c88vp8neqrqwx" path="res://ART/TILESETS/Dungeon tileset.png" id="1_oo40q"]
-[ext_resource type="PackedScene" uid="uid://cd6adtjwmyrcy" path="res://Scenes/Characters/main_character.tscn" id="2_yymg6"]
+[ext_resource type="PackedScene" uid="uid://bjv2emxjxa610" path="res://Scenes/Characters/main_character.tscn" id="2_yymg6"]
 [ext_resource type="PackedScene" uid="uid://bxqyja0bscglp" path="res://Scenes/Nodes/dungeon_controller.tscn" id="3_3f8qe"]
 [ext_resource type="PackedScene" uid="uid://cw4tfva2l74tb" path="res://Scenes/Levels/test_level.tscn" id="4_1fjrg"]
 [ext_resource type="PackedScene" uid="uid://dcn6dwct8ibcu" path="res://Scenes/Objects/chest.tscn" id="5_p7vxe"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djj7r8buafrpk"
-path="res://.godot/imported/MainCharacter3.png-2bbd0faf15a48c664a9ca82fd71f601a.ctex"
+uid="uid://cxlhuw3xlh641"
+path="res://.godot/imported/DaggerSlash.png-12b2c2eb9f87f55b2c9ac96eaa5a3e77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ART/CHARACTERS/MainCharacter3.png"
-dest_files=["res://.godot/imported/MainCharacter3.png-2bbd0faf15a48c664a9ca82fd71f601a.ctex"]
+source_file="res://ART/EFFECTS/DaggerSlash.png"
+dest_files=["res://.godot/imported/DaggerSlash.png-12b2c2eb9f87f55b2c9ac96eaa5a3e77.ctex"]
 
 [params]
 

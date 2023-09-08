@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxw7vynqlxxwl"
-path="res://.godot/imported/IronArmor.png-4b3c5c48e279a66616e90449143977e1.ctex"
+uid="uid://di2hm3gne0mne"
+path="res://.godot/imported/PurpleDagger.png-6218f21c7d90dd1ce8ffeef0d0d9eb3e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ART/CHARACTERS/IronArmor.png"
-dest_files=["res://.godot/imported/IronArmor.png-4b3c5c48e279a66616e90449143977e1.ctex"]
+source_file="res://ART/ITEMS/WEAPONS/PurpleDagger.png"
+dest_files=["res://.godot/imported/PurpleDagger.png-6218f21c7d90dd1ce8ffeef0d0d9eb3e.ctex"]
 
 [params]
 
