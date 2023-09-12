@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcw6i7bvno2py"]
+
+[ext_resource type="Shader" path="res://psx.gdshader" id="1_h2mde"]
+[ext_resource type="PackedScene" uid="uid://cbywy85fg51r7" path="res://Scenes/Levels/level.tscn" id="2_d7hho"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2pun"]
+shader = ExtResource("1_h2mde")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 12
+shader_parameter/dither_size = 1
+
+[node name="psxrender" type="SubViewportContainer"]
+material = SubResource("ShaderMaterial_q2pun")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Level" parent="SubViewport" instance=ExtResource("2_d7hho")]

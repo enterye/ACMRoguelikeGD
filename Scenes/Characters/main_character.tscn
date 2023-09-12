@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Characters/main_character.gd" id="1_oi4h5"]
 [ext_resource type="Texture2D" uid="uid://clkwr5a1r08nb" path="res://ART/EFFECTS/generic shadow.png" id="2_gxrtg"]
 [ext_resource type="Texture2D" uid="uid://c6gowvf1ybfd8" path="res://ART/CHARACTERS/MainCharacter2.png" id="2_sx2th"]
-[ext_resource type="PackedScene" uid="uid://suf6oyv1i3mb" path="res://Scenes/Items/Weapons/iron_greatsword.tscn" id="4_5jqqa"]
+[ext_resource type="PackedScene" uid="uid://c7af3oleq7la2" path="res://Scenes/Items/Weapons/iron_dagger.tscn" id="4_eathe"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abou3"]
 radius = 5.0
@@ -253,12 +253,13 @@ libraries = {
 position = Vector2(6, -1)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 occluder = SubResource("OccluderPolygon2D_83rxm")
 
 [node name="WeaponHand" type="Marker2D" parent="."]
 position = Vector2(-6, 1)
 
-[node name="IronGreatsword" parent="WeaponHand" instance=ExtResource("4_5jqqa")]
+[node name="IronDagger" parent="WeaponHand" instance=ExtResource("4_eathe")]
 
 [node name="DodgeCooldown" type="Timer" parent="."]
 one_shot = true

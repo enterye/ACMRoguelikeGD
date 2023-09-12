@@ -499,7 +499,7 @@ randomness = 1.0
 
 [node name="SlimeSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.635294)
-position = Vector2(-1, -9)
+position = Vector2(-2, -9)
 texture = ExtResource("4_qa6gg")
 hframes = 7
 frame = 1

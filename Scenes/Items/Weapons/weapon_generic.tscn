@@ -1,16 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1fu2g3duq6bs"]
+[gd_scene load_steps=2 format=3 uid="uid://b1fu2g3duq6bs"]
 
 [ext_resource type="Script" path="res://Scenes/Items/Weapons/weapon_generic.gd" id="1_2pv3b"]
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_v66qw"]
 
 [node name="WeaponGeneric" type="Node2D"]
 script = ExtResource("1_2pv3b")
 
 [node name="WeaponAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_v66qw")
-}
 
 [node name="PivotPoint" type="Marker2D" parent="."]
 

@@ -38,7 +38,7 @@ var weapon_flipped
 
 func _ready():
 	held_weapon = $WeaponHand.get_child(0)
-	damage_delt = $WeaponHand.get_child(0).DEFAULT_DAMAGE
+	damage_delt = $WeaponHand.get_child(0).default_damage
 	melee_attack.connect(held_weapon.attack)
 
 #gets the door the player is standing in
@@ -131,6 +131,9 @@ func _on_item_pick_up_zone_area_entered(area):
 
 func scale_animation_speed(speedscale):
 	$AnimationPlayer.speed_scale = $AnimationPlayer.speed_scale * speedscale
+
+func get_animation_speed():
+	return $AnimationPlayer.speed_scale
 
 func set_texture(texture):
 	$CharacterSprite.set_texture(texture)

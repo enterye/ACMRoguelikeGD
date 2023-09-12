@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://craloj1nrw83h"]
+
+[ext_resource type="Texture2D" uid="uid://ec6rm3x0uhb" path="res://ART/EFFECTS/lighteffect.png" id="1_q3p5t"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.745098, 0, 0.745098, 1)
+texture = ExtResource("1_q3p5t")
+texture_scale = 0.1
