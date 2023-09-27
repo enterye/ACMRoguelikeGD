@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var speed = 100
 var damage_delt = 50
-var dodge_speed = 2
+var dodge_speed = 3
 
 var direction: Vector2
 var pos
@@ -20,12 +20,15 @@ var mouse_angle
 var flipped = false
 
 var armorset0: Texture2D = load("res://ART/CHARACTERS/MainCharacter2.png")
+var dash_ghost: PackedScene = load("res://Scenes/Particles/dash_ghost.tscn")
+@onready var sprite = $CharacterSprite
 
 #signal to the level that the player wants to fire a projectile.
 #this signal passes the direction and position of the player
 signal fire_projectile(fire_dir, pos, rot)
 #signal for melee weapons
 signal melee_attack
+signal spawn_dash_ghost
 
 var held_weapon
 
@@ -116,6 +119,7 @@ func dodge():
 	if $DodgeCooldown.is_stopped():
 		velocity = velocity * dodge_speed
 		$DodgeCooldown.start()
+		$GhostTimer.start()
 
 func _on_hitbox_area_entered(_area):
 	health -= 10
@@ -141,3 +145,9 @@ func set_texture(texture):
 #when an item is added to the item tree
 func _on_items_child_entered_tree(node):
 	node.apply_effect()
+
+func create_dash_ghost():
+	spawn_dash_ghost.emit()
+
+func _on_ghost_timer_timeout():
+	create_dash_ghost()

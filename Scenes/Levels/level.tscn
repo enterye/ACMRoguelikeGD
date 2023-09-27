@@ -81,6 +81,8 @@ position = Vector2(-172, -194)
 [node name="ArmorSet1" parent="Items" instance=ExtResource("10_uk3kl")]
 position = Vector2(22, -39)
 
+[node name="SubPlayerParticles" type="Node2D" parent="."]
+
 [node name="MainCharacter" parent="." instance=ExtResource("2_yymg6")]
 texture_filter = 1
 position = Vector2(67, -25)
@@ -106,3 +108,4 @@ color = Color(0.282353, 0.282353, 0.282353, 1)
 blend_mode = 1
 
 [connection signal="fire_projectile" from="MainCharacter" to="." method="_on_main_character_fire_projectile"]
+[connection signal="spawn_dash_ghost" from="MainCharacter" to="." method="_on_main_character_spawn_dash_ghost"]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dpxg1l4onan1b"]
+[gd_scene load_steps=26 format=3 uid="uid://dpxg1l4onan1b"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Enemies/Slime.gd" id="1_k610l"]
-[ext_resource type="Texture2D" uid="uid://cqp7ifc7g2dg4" path="res://ART/PARTICLES/slime.png" id="2_d1gcj"]
 [ext_resource type="Texture2D" uid="uid://clkwr5a1r08nb" path="res://ART/EFFECTS/generic shadow.png" id="3_2wrjr"]
+[ext_resource type="Texture2D" uid="uid://dbqcy1u5bk2de" path="res://ART/PARTICLES/slime_chunks2.png" id="4_pjad0"]
 [ext_resource type="Texture2D" uid="uid://bt1ujsk0t78hp" path="res://ART/CHARACTERS/ENEMIES/Slime-sheet.png" id="4_qa6gg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3hxr"]
@@ -14,6 +14,19 @@ size = Vector2(17, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tdd1y"]
 size = Vector2(17, 14)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1frih"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_h7ssy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.272374, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4p0fp"]
+curve = SubResource("Curve_h7ssy")
 
 [sub_resource type="Gradient" id="Gradient_1480w"]
 colors = PackedColorArray(1, 1, 1, 0.823529, 1, 1, 1, 0.4)
@@ -27,7 +40,7 @@ emission_shape = 1
 emission_sphere_radius = 10.0
 particle_flag_disable_z = true
 direction = Vector3(0, 1, 0)
-spread = 90.0
+spread = 180.0
 flatness = 1.0
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 25.0
@@ -42,8 +55,26 @@ scale_min = 0.2
 scale_max = 0.5
 color = Color(1, 1, 1, 0.501961)
 color_ramp = SubResource("GradientTexture1D_jcxv0")
+anim_speed_min = 1.31
+anim_speed_max = 2.0
+anim_offset_max = 1.0
+anim_offset_curve = SubResource("CurveTexture_4p0fp")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sxhn2"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_t5ow0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.424125, 0.690909), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8fu4j"]
+curve = SubResource("Curve_t5ow0")
 
 [sub_resource type="Gradient" id="Gradient_jgcbj"]
+offsets = PackedFloat32Array(0, 0.522124)
 colors = PackedColorArray(1, 1, 1, 0.733333, 1, 1, 1, 0.333333)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_iyp2q"]
@@ -52,13 +83,13 @@ gradient = SubResource("Gradient_jgcbj")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x8mi7"]
 lifetime_randomness = 0.5
 emission_shape = 1
-emission_sphere_radius = 14.47
+emission_sphere_radius = 7.16
 particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
-spread = 116.56
+spread = 180.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 40.0
-initial_velocity_max = 50.0
+initial_velocity_min = 25.0
+initial_velocity_max = 30.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 damping_min = 50.0
@@ -68,6 +99,11 @@ angle_max = 90.0
 scale_min = 0.4
 scale_max = 0.8
 color_ramp = SubResource("GradientTexture1D_iyp2q")
+anim_speed_min = 1.14
+anim_speed_max = 1.14
+anim_offset_min = 0.2571
+anim_offset_max = 1.0
+anim_offset_curve = SubResource("CurveTexture_8fu4j")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ld274"]
 radius = 166.46
@@ -475,26 +511,27 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_2wrjr")
 
 [node name="LandParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_1frih")
 position = Vector2(0, 6)
 emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_22tox")
-texture = ExtResource("2_d1gcj")
+texture = ExtResource("4_pjad0")
 lifetime = 2.0
 one_shot = true
 explosiveness = 0.88
 randomness = 0.45
 
 [node name="Death" type="GPUParticles2D" parent="."]
-position = Vector2(0, 1)
+material = SubResource("CanvasItemMaterial_sxhn2")
 emitting = false
-amount = 30
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_x8mi7")
-texture = ExtResource("2_d1gcj")
+texture = ExtResource("4_pjad0")
 lifetime = 2.0
 one_shot = true
 speed_scale = 2.0
-explosiveness = 1.0
+explosiveness = 0.88
 randomness = 1.0
 
 [node name="SlimeSprite" type="Sprite2D" parent="."]
